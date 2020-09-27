@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        .green {
+            background-color: green;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        #userDream {
+            background-color: #ffff99;
+            text-align: center;
+            padding: 20px;
+            margin: 10px 70px;
+            box-shadow: 5px 9px 20px rgba(0, 0, 0, 0.15);
+            font-family: Montserrat;
+        }
+    </style>
+</head>
+
+<body>
+    <div id = "userDream">
+    <p>What are you dreaming about?</p>
+    <form action="#">
+        <input id="userInput" type="text" value="" />
+        <input id="button" type="button" onclick="changeText()" value="Tell me"></input>
+    </form>
+    <p>
+        Well, your dream about <span id="result"></span> is very interesting!
+    </p>
+    </div>
+
+    <script>
+        function changeText() {
+            let userText = document.getElementById('userInput').value;
+            document.getElementById('result').innerHTML = userText;
+            changeHighlightColor(userText);
+            document.getElementById('userInput').value = "";
+        }
+
+        function changeHighlightColor(userText) {
+            let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
+            if (format.test(userText)) {
+                 document.getElementById('result').setAttribute('class', 'red');
+            } else if (userText.length > 3) {
+                document.getElementById('result').setAttribute('class', 'green');
+            } else {
+                document.getElementById('result').removeAttribute('class');
+            }
+        }
+
+        document.getElementById("userInput")
+            .addEventListener("keyup", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    changeText();
+                }
+        });
+    </script>
+</body>
+
+</html>
